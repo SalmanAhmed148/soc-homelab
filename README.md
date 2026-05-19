@@ -450,7 +450,6 @@ soc-homelab/
 
 <div align="center">
 
-**Developed by [excitedchampion](https://github.com/excitedchampion)**
-*Bachelor of Science in Cybersecurity — Final Year Portfolio Project*
+**Developed by [SalmanAhmed148](https://github.com/SalmanAhmed148)**
 
 </div>
