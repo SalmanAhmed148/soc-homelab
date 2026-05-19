@@ -1,0 +1,9 @@
+<group name="sigma_converted,custom">
+    <rule id="100200" level="7">
+        <description>Suspicious Sudo Activity - Detects suspicious sudo escalation</description>
+        <field name="full_log">.*linux</field>
+        <field name="full_log">.*auditd</field>
+        <field name="full_log">.*EXECVE</field>
+        <field name="full_log">.*sudo</field>
+    </rule>
+</group>

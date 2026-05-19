@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    ports:
+      - "9400:9200"
+
+  cassandra:
+    image: cassandra:4.1.3
+    volumes:
+      - cassandra-data:/var/lib/cassandra
+
+  cortex:
+    image: thehiveproject/cortex:3.1.8
+    environment:
+      - JOB_DIRECTORY=/tmp/cortex-jobs
+    volumes:
+      - cortex-data:/data
+    ports:
+      - "9001:9001"
+    depends_on:
+      - elasticsearch
+
+  thehive:
+    image: strangebee/thehive:5.2.14
+    ports:
+      - "9000:9000"
+    depends_on:
+      - cassandra
+      - elasticsearch
+      - cortex
+    volumes:
+      - thehive-data:/data
+    command:
+      - --secret
+      - "MySuperSecretKeyChangeMe123!"
+      - --cql-hostnames
+      - cassandra
+      - --index-backend
+      - elasticsearch
+      - --es-hostnames
+      - elasticsearch
+      - --cortex-hostnames
+      - cortex
+      - --cortex-port
+      - "9001"
+      - --cortex-keys
+      - "cortex:dvT+cvNuLVoTvlQI6F4ZclShMs+Y1iH1"
+
+volumes:
+  es-data:
+  cassandra-data:
+  thehive-data:
+  cortex-data:

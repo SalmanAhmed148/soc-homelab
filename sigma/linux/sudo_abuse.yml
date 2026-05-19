@@ -1,0 +1,22 @@
+title: Suspicious Sudo Activity
+status: stable
+description: Detects suspicious sudo escalation
+logsource:
+    product: linux
+    service: auditd
+detection:
+    selection:
+        type: EXECVE
+        a0: 'sudo'
+        a1|contains:
+            - 'su'
+            - '/bin/bash'
+            - 'nc'
+            - 'python'
+    condition: selection
+falsepositives:
+    - Admin tasks
+level: medium
+tags:
+    - attack.privilege_escalation
+    - attack.t1548.003

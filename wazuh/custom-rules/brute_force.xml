@@ -1,0 +1,9 @@
+<group name="sigma_converted,custom">
+    <rule id="100200" level="7">
+        <description>Multiple Failed Logins - Brute Force - Detects brute force authentication attempts</description>
+        <field name="full_log">.*windows</field>
+        <field name="full_log">.*security</field>
+        <field name="full_log">.*4625</field>
+        <field name="full_log">.*10m</field>
+    </rule>
+</group>

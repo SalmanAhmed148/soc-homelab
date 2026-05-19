@@ -1,0 +1,23 @@
+title: Suspicious PowerShell Obfuscation
+status: stable
+description: Detects obfuscated PowerShell commands
+logsource:
+    product: windows
+    service: sysmon
+detection:
+    selection:
+        EventID: 1
+        CommandLine|contains:
+            - 'FromBase64String'
+            - 'Invoke-Expression'
+            - 'IEX'
+            - 'bitsadmin'
+            - 'certutil'
+            - 'System.Net.WebClient'
+    condition: selection
+falsepositives:
+    - Admin scripts
+level: high
+tags:
+    - attack.execution
+    - attack.t1059.001

@@ -1,0 +1,22 @@
+title: LSASS Memory Dump - Credential Access
+status: stable
+description: Detects process access to LSASS with suspicious access rights
+logsource:
+    product: windows
+    service: sysmon
+detection:
+    selection:
+        EventID: 10
+        TargetImage|endswith: '\lsass.exe'
+        GrantedAccess|contains:
+            - '0x1010'
+            - '0x1410'
+            - '0x143a'
+            - '0x1438'
+    condition: selection
+falsepositives:
+    - Security tools
+level: critical
+tags:
+    - attack.credential_access
+    - attack.t1003.001

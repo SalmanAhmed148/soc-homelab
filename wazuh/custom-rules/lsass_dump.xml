@@ -1,0 +1,9 @@
+<group name="sigma_converted,custom">
+    <rule id="100200" level="7">
+        <description>LSASS Memory Dump - Credential Access - Detects process access to LSASS with suspicious access rights</description>
+        <field name="full_log">.*windows</field>
+        <field name="full_log">.*sysmon</field>
+        <field name="full_log">.*10</field>
+        <field name="win.eventdata.Image">.*\lsass.exe</field>
+    </rule>
+</group>

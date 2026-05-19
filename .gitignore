@@ -1,0 +1,7 @@
+# Ignore OS metadata
+.DS_Store
+Thumbs.db
+
+# Ignore local container runtime caches and logs
+*.log
+.env
